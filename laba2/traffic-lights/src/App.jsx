@@ -5,17 +5,17 @@ function App() {
   return (
     <div className="App">
       <h1>Демонстрація світлофорів</h1>
-      
-      <div style={{ marginTop: "30px" }}>
+
+      <div className="traffic-light-section">
         <h2>Вертикальний світлофор</h2>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="traffic-light-wrapper">
           <TrafficLights orientation="vertical" />
         </div>
       </div>
 
-      <div style={{ marginTop: "30px" }}>
+      <div className="traffic-light-section">
         <h2>Горизонтальний світлофор</h2>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div className="traffic-light-wrapper">
           <TrafficLights orientation="horizontal" />
         </div>
       </div>
