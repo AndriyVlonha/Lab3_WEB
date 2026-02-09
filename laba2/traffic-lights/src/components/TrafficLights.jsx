@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
 import Light from "./Light";
 import PropTypes from "prop-types";
+import "./TrafficLights.css";
 
 const TrafficLights = ({ orientation = "vertical" }) => {
   const [activeLight, setActiveLight] = useState(0);
+  const [clicks, setClicks] = useState({
+    red: 0,
+    yellow: 0,
+    green: 0,
+  });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -13,22 +19,52 @@ const TrafficLights = ({ orientation = "vertical" }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const containerStyle = {
-    display: "flex",
-    flexDirection: orientation === "vertical" ? "column" : "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#222",
-    padding: "20px",
-    borderRadius: "10px",
-    margin: "20px",
+  const handleLightClick = (color) => {
+    setClicks((prevClicks) => ({
+      ...prevClicks,
+      [color]: prevClicks[color] + 1,
+    }));
   };
 
+  const containerClasses = `traffic-lights-container ${orientation}`;
+
   return (
-    <div style={containerStyle}>
-      <Light tlColor="red" isActive={activeLight === 0} />
-      <Light tlColor="yellow" isActive={activeLight === 1} />
-      <Light tlColor="green" isActive={activeLight === 2} />
+    <div>
+      <div className={containerClasses}>
+        <Light
+          tlColor="red"
+          isActive={activeLight === 0}
+          onClick={() => handleLightClick("red")}
+        />
+        <Light
+          tlColor="yellow"
+          isActive={activeLight === 1}
+          onClick={() => handleLightClick("yellow")}
+        />
+        <Light
+          tlColor="green"
+          isActive={activeLight === 2}
+          onClick={() => handleLightClick("green")}
+        />
+      </div>
+
+      <div className="traffic-lights-stats">
+        <h3>Статистика кліків</h3>
+        <div className="stats-grid">
+          <div className="stat-item">
+            <span className="stat-color red">Червоний</span>
+            <span className="stat-count">{clicks.red}</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-color yellow">Жовтий</span>
+            <span className="stat-count">{clicks.yellow}</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-color green">Зелений</span>
+            <span className="stat-count">{clicks.green}</span>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
