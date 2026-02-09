@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Light from "./Light";
 import PropTypes from "prop-types";
-import "./TrafficLights.css";
+import "./css/TrafficLights.css";
 
 const TrafficLights = ({ orientation = "vertical" }) => {
   const [activeLight, setActiveLight] = useState(0);

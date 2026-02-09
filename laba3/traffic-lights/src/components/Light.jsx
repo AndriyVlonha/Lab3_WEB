@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./Light.css";
+import "./css/Light.css";
 
 const Light = ({ tlColor = "red", isActive = false, onClick }) => {
   const lightClasses = `light ${tlColor} ${isActive ? "active" : "inactive"}`;
